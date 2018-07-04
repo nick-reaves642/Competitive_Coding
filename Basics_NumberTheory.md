@@ -102,6 +102,6 @@ Modular multiplicative inverse is [res]
 _Time Complexity: O(log(max(A,M)))_
 
 ```
-**SOURCE: **Hackerearth.com
+**SOURCE:** Hackerearth.com
 ```
 
