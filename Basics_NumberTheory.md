@@ -36,18 +36,22 @@ Since we have B%M, the inverse must be in the range [0,M-1]. However, since 0 is
 
 > **Naive Approach**
 
-    int modInverse(int A,int M)
-    {
-        A=A%M;
-        for(int B=1;B<M;B++)
-          if((A*B)%M)==1)
-              return B;
-    }
+```cpp
+int modInverse(int A,int M)
+{
+    A=A%M;
+    for(int B=1;B<M;B++)
+      if((A*B)%M)==1)
+          return B;
+}
+```
 _Time Complexity: O(M)_
 
 
 
 > **Recommended approach**
+
+Use this only if ```a``` and ```m``` are co-prime .i.e. their HCF is 1 (in most cases they are).
 
 ```cpp
 void modInverse(int a, int m)
@@ -100,6 +104,103 @@ Inverse does not exist
 Modular multiplicative inverse is [res]
 ```
 _Time Complexity: O(log(max(A,M)))_
+
+
+## _Modular exponentiation_
+Exponentiation is a mathematical operation that is expressed as x<sup>n</sup> and computed as x<sup>n</sup>= x * x * x * . . . * x (_n times_)
+ 
+> **Naive Approach**
+
+```cpp
+int recursivePower(int x,int n)
+{
+    if(n==0)
+        return 1;
+    return x*recursivePower(x,n-1);
+}
+```
+_Time Complexity: O(n)_
+
+OR 
+
+
+```cpp
+int binaryExponentiation(int x,int n)
+{
+    if(n==0)
+        return 1;
+    else if(n%2 == 0)        //n is even
+        return binaryExponentiation(x*x,n/2);
+    else                             //n is odd
+        return x*binaryExponentiation(x*x,(n-1)/2);
+}
+```
+_Time Complexity: O(log n)_
+
+However, storing answers that are too large for their respective datatypes is an issue with this method. In some languages the answer will exceed the range of the datatype while in other languages it will timeout due to large number multiplications. In such instances, you must use modulus (%). Instead of finding x<sup>n</sup>, you must find (x<sup>n</sup>)%m.
+
+For example, run the implementation of the method to find 2<sup>10<sup>9</sup></sup>. The O(n) solution will timeout, while the O(log n) solution will run in time but it will produce garbage values.
+
+To fix this you must use the modulo operation i.e. % **_M_** in those lines where a temporary answer is computed.
+
+> **Recommended approach**
+
+> _RECURSIVE METHOD_
+```cpp
+int modularExponentiation(int x,int n,int M)
+{
+    if(n==0)
+        return 1;
+    else if(n%2 == 0)        //n is even
+        return modularExponentiation((x*x)%M,n/2,M);
+    else                             //n is odd
+        return (x*modularExponentiation((x*x)%M,(n-1)/2,M))%M;
+}
+```
+_Time complexity: O(log N)_
+
+_Memory complexity: O(log N) because a function call consumes memory and log N recursive function calls are made_
+
+> _ITERATIVE METHOD_
+
+```cpp
+int modularExponentiation(int x,int n,int M)
+{
+    int result=1;
+    while(n>0)
+    {
+        if(power % 2 ==1)
+            result=(result * x)%M;
+        x=(x*x)%M;
+        n=n/2;
+    }
+    return result;
+}
+```
+_Time complexity: O(log N)_
+
+_Memory complexity: O(1)_
+
+## Greatest Common Divisor (GCD)
+
+Always use euclidean algo to solve gcd problems.
+
+**YOUTUBE VIDEO**
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=AJn843kplDw
+" target="_blank"><img src="http://img.youtube.com/vi/AJn843kplDw/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
+
+**Algorithm:**
+
+```cpp
+int GCD(int A, int B) {
+    if(B==0)
+        return A;
+    else
+        return GCD(B, A % B);
+}
+```
 
 
 > **SOURCE**: Hackerearth.com
