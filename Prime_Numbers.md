@@ -1,6 +1,7 @@
+# Prime Numbers 
 The concept of prime numbers is a very important concept in math. This article discusses the concept of prime numbers and related properties.
 
-What are prime numbers and composite numbers?
+###### What are prime numbers and composite numbers?
 
 Prime numbers are those numbers that are greater than 1 and have only two factors 1 and itself.
 
@@ -42,8 +43,8 @@ For example, if N=50, sqrt(N)=7 (floor value). You will iterate from 1 to 7 and 
 bool checkprime(int N){
     for(int i=2 ; i<=int(sqrt(N)) ; i++)
         if (N % i == 0)
-            return true;
-    return false;
+            return false;
+    return true;
 }
 ```
 _Time Complexity= O(sqrt(N))_
