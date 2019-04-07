@@ -7,9 +7,9 @@ If you are an absolute beginner in coding, I recommend you to first go through h
 
 ```
 while(true):
-  sleep
-  eat
-  code
+  sleep()
+  eat()
+  code()
 ```
 
 :+1: Happy coding!!!
